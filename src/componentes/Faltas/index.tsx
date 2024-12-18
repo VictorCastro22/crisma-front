@@ -11,7 +11,8 @@ const Faltas: React.FC = () => {
   const [crismandos, setCrismandos] = useState<Crismando[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/reports')
+    const API_URL = process.env.REACT_APP_API_URL;
+    fetch(`${API_URL}/reports`)
       .then((response) => response.json())
       .then((data) => {
         setCrismandos(data);

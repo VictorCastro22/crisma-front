@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 
 const ComputarPresenca: React.FC = () => {
   const [turma, setTurma] = useState('');
@@ -7,7 +7,8 @@ const ComputarPresenca: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const response = await fetch('http://localhost:3001/register', {
+    const API_URL = process.env.REACT_APP_API_URL;
+    const response = await fetch(`${API_URL}/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
