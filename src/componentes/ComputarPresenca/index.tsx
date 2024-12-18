@@ -8,6 +8,7 @@ const ComputarPresenca: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const API_URL = process.env.REACT_APP_API_URL;
+    console.log("API URL:", API_URL);
     const response = await fetch(`${API_URL}/register`, {
       method: 'POST',
       headers: {
@@ -17,7 +18,7 @@ const ComputarPresenca: React.FC = () => {
     });
     const data = await response.json();
     alert(data.message);
-  };
+  };  
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
