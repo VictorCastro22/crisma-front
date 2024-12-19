@@ -21,12 +21,16 @@ const ComputarPresenca: React.FC = () => {
         },
         body: JSON.stringify({ turma, crismando, presenca }),
       });
+      if (!response.ok) {
+        console.error("Erro ao enviar dados para a API.");
+        return;
+      }
       const data = await response.json();
       alert(data.message);
     } catch (error) {
       console.error("Erro na solicitação:", error);
     }
-  };  
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
