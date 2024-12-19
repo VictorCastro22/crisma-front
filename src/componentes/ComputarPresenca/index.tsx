@@ -8,16 +8,24 @@ const ComputarPresenca: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const API_URL = process.env.REACT_APP_API_URL;
+    if (!API_URL) {
+      console.error("API URL não está definida.");
+      return;
+    }
     console.log("API URL:", API_URL);
-    const response = await fetch(`${API_URL}/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ turma, crismando, presenca }),
-    });
-    const data = await response.json();
-    alert(data.message);
+    try {
+      const response = await fetch(`${API_URL}/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ turma, crismando, presenca }),
+      });
+      const data = await response.json();
+      alert(data.message);
+    } catch (error) {
+      console.error("Erro na solicitação:", error);
+    }
   };  
 
   return (
