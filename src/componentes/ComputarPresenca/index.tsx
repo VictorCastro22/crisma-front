@@ -1,9 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const ComputarPresenca: React.FC = () => {
   const [turma, setTurma] = useState('');
   const [crismando, setCrismando] = useState('');
   const [presenca, setPresenca] = useState('Presente');
+
+  useEffect(() => {
+    console.log("Ambiente:", process.env.NODE_ENV);
+    console.log("API URL:", process.env.REACT_APP_API_URL);
+  }, []);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -12,7 +17,7 @@ const ComputarPresenca: React.FC = () => {
       console.error("API URL não está definida.");
       return;
     }
-    console.log("API URL:", API_URL);
+    console.log("API URL dentro da função:", API_URL);
     try {
       const response = await fetch(`${API_URL}/register`, {
         method: 'POST',
