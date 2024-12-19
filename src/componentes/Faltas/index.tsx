@@ -5,6 +5,7 @@ interface Crismando {
   turma: string | null;
   crismando: string | null;
   presenca: string;
+  catequista: string | null;
 }
 
 const Faltas: React.FC = () => {
@@ -36,6 +37,7 @@ const Faltas: React.FC = () => {
             turma={crismando.turma ?? 'Turma desconhecida'}
             crismando={crismando.crismando ?? 'Crismando desconhecido'}
             ausenteCount={ausencias[crismando.crismando || ''] || 0}
+            catequista={crismando.catequista ?? 'Catequista desconhecido'}
           />
         ))}
       </div>

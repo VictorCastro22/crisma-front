@@ -31,7 +31,7 @@ const ComputarPresenca: React.FC = () => {
         return;
       }
       const data = await response.json();
-      alert(data.message);
+      alert(`Registro salvo! \nTurma: ${data.turma} \nCrismando: ${data.crismando} \nPresença: ${data.presenca} \nCatequista: ${data.catequista}`);
     } catch (error) {
       console.error("Erro na solicitação:", error);
     }
