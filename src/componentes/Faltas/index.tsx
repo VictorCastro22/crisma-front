@@ -1,28 +1,29 @@
 import { useState, useEffect } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../firebaseConfig';
 import CrismandoCard from '../CrismandoCard';
 
 interface Crismando {
-  turma: string | null;
-  crismando: string | null;
+  turma: string;
+  crismando: string;
   presenca: string;
-  catequista: string | null;
 }
 
 const Faltas: React.FC = () => {
   const [crismandos, setCrismandos] = useState<Crismando[]>([]);
 
   useEffect(() => {
-    const API_URL = process.env.REACT_APP_API_URL;
-    fetch(`${API_URL}/reports`)
-      .then((response) => response.json())
-      .then((data) => {
-        setCrismandos(data);
-      });
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(collection(db, 'presencas'));
+      const data = querySnapshot.docs.map((doc) => doc.data() as Crismando);
+      setCrismandos(data);
+    };
+    fetchData();
   }, []);
 
   const ausencias = crismandos.reduce((acc: { [key: string]: number }, crismando) => {
     if (crismando.presenca === 'Ausente') {
-      acc[crismando.crismando || ''] = (acc[crismando.crismando || ''] || 0) + 1;
+      acc[crismando.crismando] = (acc[crismando.crismando] || 0) + 1;
     }
     return acc;
   }, {});
@@ -33,11 +34,10 @@ const Faltas: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {crismandos.map((crismando) => (
           <CrismandoCard
-            key={`${crismando.turma ?? 'unknown-turma'}-${crismando.crismando ?? 'unknown-crismando'}`}
-            turma={crismando.turma ?? 'Turma desconhecida'}
-            crismando={crismando.crismando ?? 'Crismando desconhecido'}
-            ausenteCount={ausencias[crismando.crismando || ''] || 0}
-            catequista={crismando.catequista ?? 'Catequista desconhecido'}
+            key={`${crismando.turma}-${crismando.crismando}`}
+            turma={crismando.turma}
+            crismando={crismando.crismando}
+            ausenteCount={ausencias[crismando.crismando] || 0}
           />
         ))}
       </div>

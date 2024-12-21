@@ -1,39 +1,24 @@
-import { useState, useEffect } from 'react';
+import  { useState } from 'react';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../../firebaseConfig';
 
 const ComputarPresenca: React.FC = () => {
   const [turma, setTurma] = useState('');
   const [crismando, setCrismando] = useState('');
   const [presenca, setPresenca] = useState('Presente');
 
-  useEffect(() => {
-    console.log("Ambiente:", process.env.NODE_ENV);
-    console.log("API URL:", process.env.REACT_APP_API_URL);
-  }, []);
-
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const API_URL = process.env.REACT_APP_API_URL;
-    if (!API_URL) {
-      console.error("API URL não está definida.");
-      return;
-    }
-    console.log("API URL dentro da função:", API_URL);
     try {
-      const response = await fetch(`${API_URL}/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ turma, crismando, presenca }),
+      await addDoc(collection(db, 'presencas'), {
+        turma,
+        crismando,
+        presenca,
       });
-      if (!response.ok) {
-        console.error("Erro ao enviar dados para a API.");
-        return;
-      }
-      const data = await response.json();
-      alert(`Registro salvo! \nTurma: ${data.turma} \nCrismando: ${data.crismando} \nPresença: ${data.presenca} \nCatequista: ${data.catequista}`);
-    } catch (error) {
-      console.error("Erro na solicitação:", error);
+      alert('Registro salvo!');
+    } catch (e) {
+      console.error('Erro ao adicionar documento: ', e);
+      alert('Erro ao salvar o registro.');
     }
   };
 
