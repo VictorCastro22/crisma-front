@@ -21,7 +21,7 @@ const Header: React.FC = () => {
           className="hover:underline text-[#444444] uppercase"
           style={{ fontFamily: 'Nunito Sans', fontSize: '15px' }}
         >
-          Crismandos
+          Calendário
         </button>
         <button
           type="button"
@@ -29,7 +29,7 @@ const Header: React.FC = () => {
           className="hover:underline text-[#444444] uppercase"
           style={{ fontFamily: 'Nunito Sans', fontSize: '15px' }}
         >
-          Calendário
+          Crismandos
         </button>
         <button
           type="button"
@@ -48,7 +48,7 @@ const Header: React.FC = () => {
         ☰
       </button>
       {isOpen && (
-        <div className="absolute top-16 left-0 w-full bg-white text-black flex flex-col items-center space-y-4 py-4 md:hidden">
+        <div className="absolute top-16 left-0 w-full bg-white text-black flex flex-col items-center space-y-4 py-4 z-50">
           <button
             type="button"
             onClick={() => setIsOpen(false)}
@@ -63,7 +63,7 @@ const Header: React.FC = () => {
             className="hover:underline text-[#444444] uppercase"
             style={{ fontFamily: 'Nunito Sans', fontSize: '15px' }}
           >
-            Crismandos
+            Calendário
           </button>
           <button
             type="button"
@@ -71,7 +71,7 @@ const Header: React.FC = () => {
             className="hover:underline text-[#444444] uppercase"
             style={{ fontFamily: 'Nunito Sans', fontSize: '15px' }}
           >
-            Calendário
+            Crismandos
           </button>
           <button
             type="button"

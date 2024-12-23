@@ -1,16 +1,22 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './componentes/Home';
-import Faltas from './componentes/Faltas';
-import ComputarPresenca from './componentes/ComputarPresenca';
+import Header from './componentes/Header';
+import Banner from './componentes/Banner';
 import './index.css';
+
+function Home() {
+  return (
+    <div>
+      <Header />
+      <Banner />
+    </div>
+  );
+}
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/faltas" element={<Faltas />} />
-        <Route path="/computar" element={<ComputarPresenca />} />
       </Routes>
     </Router>
   );
