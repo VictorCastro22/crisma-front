@@ -10,7 +10,7 @@ const Banner: React.FC = () => {
       />
       <div className="absolute inset-0 flex items-center justify-center">
         <h2
-          className="text-white font-semibold"
+          className="text-white"
           style={{ fontFamily: 'Nunito Sans', fontSize: '36px' }}
         >
           Crisma de Jovens
